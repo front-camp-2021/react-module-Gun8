@@ -1,13 +1,20 @@
-import React, { useState, useRef, useEffect} from 'react';
+import React, { useRef, useEffect} from 'react';
 import "./styles/doubleSlider.css";
 import getSubElements from "../functions/getSubElements";
 
 const DoubleSlider = (props) => {
-    const {filterName, formatValue, min, max,precision} = props;
-    const [selected, setSelected] = useState({
-        from: min,
-        to: max
-    });
+    const {
+        filterName = "",
+        formatValue = value => value,
+        min = 100,
+        max = 200,
+        selected = {
+            from: min,
+            to: max
+        },
+        precision = 0,
+        updateSlider
+    } = props;
 
     const parent = useRef();
     let subElements = null;
@@ -100,7 +107,9 @@ const DoubleSlider = (props) => {
             * Math.pow(10,precision)) / Math.pow(10,precision);
         const to = Math.round((thumbRight.offsetLeft / slider.offsetWidth * (max - min) + min)
             * Math.pow(10,precision)) / Math.pow(10,precision);
-        setSelected({from,to});
+
+        updateSlider(filterName,{from,to});
+
         shift = null;
     };
 

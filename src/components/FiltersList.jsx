@@ -2,7 +2,7 @@ import React from 'react';
 import FiltersListItem from "./FiltersListItem";
 
 const FiltersList = (props) => {
-    const {title, list} = props;
+    const {title = "", list = []} = props;
 
     const onCheck = (event) => {
         if(event.target.checked){
@@ -15,8 +15,8 @@ const FiltersList = (props) => {
 
     return(
         <div className="filters__item">
-            <h3 className="filters__list-name" data-element="title">{title}</h3>
-            <ul className="filters__list" data-element="list">
+            <h3 className="filters__list-name">{title}</h3>
+            <ul className="filters__list">
                 {list.map(item => {
                     return <FiltersListItem item = {item} key = {item.value} onCheck = {onCheck}/>
                 })}
