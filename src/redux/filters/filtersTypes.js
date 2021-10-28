@@ -1,0 +1,2 @@
+export const CHECK_FIELD = 'CHECK_FIELD';
+export const REMOVE_ALL_CHECKS = 'REMOVE_ALL_CHECKS';

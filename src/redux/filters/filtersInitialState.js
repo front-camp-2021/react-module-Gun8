@@ -1,9 +1,5 @@
-import React from 'react';
-import SideBar from './SideBar';
-import ItemListContainer from './ItemListContainer';
-
-const Catalog = () => {
-    /*const category = [
+export const initialState = {
+    category: [
         {
             value: 'category=cell_phones',
             title: 'Cell Phones',
@@ -24,9 +20,8 @@ const Catalog = () => {
             value: 'category=audio',
             title: 'Audio',
         }
-    ];
-
-    const brand = [
+    ],
+    brand: [
         {
             value: 'brand=insigni',
             title: 'Insigni',
@@ -39,24 +34,5 @@ const Catalog = () => {
             value: 'brand=apple',
             title: 'Apple',
         }
-    ];*/
-
-    const priceSlider = {
-        min: 53,
-        max: 85000,
-        formatValue: value => value + '₴',
-        filterName: "Price",
-    };
-
-return(
-    <section className="catalog" data-element="catalog">
-        <SideBar
-            /*filters = {[category,brand]}*/
-            sliders = {[priceSlider]}
-        />
-        <ItemListContainer/>
-    </section>
-    )
+    ]
 };
-
-export default Catalog;

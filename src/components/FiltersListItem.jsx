@@ -1,8 +1,10 @@
 import React from 'react';
 
 const FiltersListItem = (props) => {
-    const {value = "",title = ""} = props.item;
+    const {value = "",title = "",checked = false} = props.item;
     const {onCheck} = props;
+
+
     return(
         <li className="filters__list-item">
                 <input type="checkbox"
@@ -12,7 +14,7 @@ const FiltersListItem = (props) => {
                        onChange={event => onCheck(event)}>
                 </input>
                     <label htmlFor={value.split("=")[1]}>
-                        <span className="filters__checkbox">
+                        <span className={`filters__checkbox${checked?" filters__checkbox_checked":""}`}>
                         </span>
                         <span className="filters__val">{title}</span>
                     </label>
