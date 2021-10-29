@@ -1,8 +1,12 @@
 import React, { useRef, useEffect} from 'react';
 import "./styles/doubleSlider.css";
 import getSubElements from "../functions/getSubElements";
+import {useDispatch} from 'react-redux';
+import {changeThumbLocation} from '../redux';
 
 const DoubleSlider = (props) => {
+    const dispatch = useDispatch();
+
     const {
         filterName = "",
         formatValue = value => value,
@@ -13,8 +17,7 @@ const DoubleSlider = (props) => {
             to: max
         },
         precision = 0,
-        updateSlider
-    } = props;
+    } = props.slider;
 
     const parent = useRef();
     let subElements = null;
@@ -25,8 +28,7 @@ const DoubleSlider = (props) => {
     },[selected]);
 
     const getSubElementsAfterMount = (parent) => {
-        const data = getSubElements(parent);
-        subElements = data;
+        subElements = getSubElements(parent);
     };
 
     const onMouseDown = (event) => {
@@ -107,8 +109,15 @@ const DoubleSlider = (props) => {
             * Math.pow(10,precision)) / Math.pow(10,precision);
         const to = Math.round((thumbRight.offsetLeft / slider.offsetWidth * (max - min) + min)
             * Math.pow(10,precision)) / Math.pow(10,precision);
+        const name = filterName.split('')[0].toLowerCase() + filterName.slice(1);
 
-        updateSlider(filterName,{from,to});
+        dispatch(changeThumbLocation({
+            selected: {
+                from,
+                to
+            },
+            name
+        }));
 
         shift = null;
     };

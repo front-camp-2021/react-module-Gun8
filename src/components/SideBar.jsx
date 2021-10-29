@@ -1,23 +1,27 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {removeAllChecks} from '../redux';
+import {removeAllChecks, resetSlider} from '../redux';
 import FiltersList from './FiltersList';
 import DoubleSlider from './DoubleSlider';
 
-const SideBar = (props) => {
+const SideBar = () => {
     const filters = useSelector(state => Object.values(state.filters));
+    const sliders = useSelector(state => Object.values(state.sliders));
     const dispatch = useDispatch();
 
-    const [sliders, setSliders] = useState(props.sliders);
+    const reset = () => {
+        const thumbLeft = document.querySelectorAll('.range-slider__thumb-left');
+        const thumbRight = document.querySelectorAll('.range-slider__thumb-right');
+        const progress = document.querySelectorAll('.range-slider__progress');
 
-    const updateSlider = (sliderName,selected) => {
-        setSliders(sliders.map(item => {
-            if(item.filterName === sliderName){
-                item.selected = selected;
-            }
+        dispatch(removeAllChecks());
+        dispatch(resetSlider());
 
-            return item;
-        }));
+        sliders.map((slider,i) => {
+            thumbLeft.item(i).style.left = 0;
+            thumbRight.item(i).style.right = 0;
+            progress.item(i).style = 'left:0; right:0';
+        });
     };
 
     return (
@@ -32,13 +36,7 @@ const SideBar = (props) => {
             <div className="filters__content">
                 {sliders.map((slider, index) => {
                     return <DoubleSlider
-                        min = {slider.min}
-                        max = {slider.max}
-                        formatValue = {slider.formatValue}
-                        filterName = {slider.filterName}
-                        precision = {slider.precision}
-                        selected = {slider.selected}
-                        updateSlider = {updateSlider}
+                        slider = {slider}
                         key = {index}
                     />
                 })}
@@ -47,7 +45,7 @@ const SideBar = (props) => {
                     return <FiltersList title = {title} list = {list} key = {index}/>
                 })}
             </div>
-            <button className="filters__reset-btn" data-element="btn" onClick={() => dispatch(removeAllChecks())}>
+            <button className="filters__reset-btn" data-element="btn" onClick={reset}>
                 Clear all filters</button>
         </aside>
     );

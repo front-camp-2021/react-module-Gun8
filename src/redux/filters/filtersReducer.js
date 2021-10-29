@@ -12,7 +12,7 @@ const filtersReducer = (state = initialState, action) => {
                     if(action.payload.index === index){
                         return {
                             ...item,
-                            checked: true
+                            checked: !item.checked
                         }
                     }
 
