@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {removeAllChecks, resetSlider} from '../redux';
+import {fetchFilters, removeAllChecks, resetSlider} from '../redux';
 import FiltersList from './FiltersList';
 import DoubleSlider from './DoubleSlider';
 
 const SideBar = () => {
-    const filters = useSelector(state => Object.values(state.filters));
+    const url = process.env.REACT_APP_BACKEND_URL;
+    const filters = useSelector(state => state.filters);
     const sliders = useSelector(state => Object.values(state.sliders));
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchFilters(url));
+    }, []);
 
     const reset = () => {
         const thumbLeft = document.querySelectorAll('.range-slider__thumb-left');
@@ -40,7 +45,7 @@ const SideBar = () => {
                         key = {index}
                     />
                 })}
-                {filters.map((list, index) => {
+                {filters.data.map((list, index) => {
                     const title = list[0].value.split("=")[0].slice(0,1).toUpperCase() + list[0].value.split("=")[0].slice(1);
                     return <FiltersList title = {title} list = {list} key = {index}/>
                 })}

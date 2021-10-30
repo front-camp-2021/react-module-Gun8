@@ -17,7 +17,7 @@ const FiltersList = (props) => {
                         key = {item.value}
                         onCheck = {() => {dispatch(checkField({
                             index,
-                            name: item.value.split("=")[0]
+                            value: item.value
                         }))}}
                     />
                 })}
