@@ -1,16 +1,13 @@
-import {CHANGE_THUMB_LOCATION, RESET_SLIDERS} from './slidersTypes';
+import {CHANGE_THUMB_LOCATION, RESET_SLIDERS, SET_SLIDERS} from './slidersTypes';
 
-const initialState = {
-    price: {
-        min: 53,
-        max: 85000,
-        formatValue: value => value + '₴',
-        filterName: "Price"
-    }
-};
+const initialState = {};
 
 const slidersReducer = (state = initialState, action) => {
   switch (action.type){
+      case SET_SLIDERS:
+          return{
+              ...action.payload
+          };
       case CHANGE_THUMB_LOCATION:
           const name = action.payload.name;
 

@@ -17,8 +17,8 @@ export const fetchFilters = (url) => {
 
         Promise.all(filtersPromiseArr)
             .then(response => {
-                const filters = response.map((item,i) => prepareFilters(item.data,fields[i]));
-                console.log(filters);
+                const filters = {};
+                response.forEach((item,i) => filters[fields[i]] = prepareFilters(item.data,fields[i]));
                 dispatch(fetchFiltersSuccess(filters));
             })
             .catch(error => {

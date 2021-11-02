@@ -1,4 +1,4 @@
-import React, { useRef, useEffect} from 'react';
+import React, { useRef, useEffect, useState} from 'react';
 import "./styles/doubleSlider.css";
 import getSubElements from "../functions/getSubElements";
 import {useDispatch} from 'react-redux';
@@ -20,15 +20,15 @@ const DoubleSlider = (props) => {
     } = props.slider;
 
     const parent = useRef();
-    let subElements = null;
+    const [subElements, setSubElements] = useState({});
     let shift = null;
 
     useEffect(() => {
         getSubElementsAfterMount(parent.current);
-    },[selected]);
+    },[]);
 
     const getSubElementsAfterMount = (parent) => {
-        subElements = getSubElements(parent);
+        setSubElements(getSubElements(parent));
     };
 
     const onMouseDown = (event) => {

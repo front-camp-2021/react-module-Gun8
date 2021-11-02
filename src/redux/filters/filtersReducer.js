@@ -8,7 +8,7 @@ import {
 
 const initialState = {
     loading: false,
-    data: [],
+    data: {},
     error: ''
 };
 
@@ -32,27 +32,36 @@ const filtersReducer = (state = initialState, action) => {
                 error: action.payload
             };
         case CHECK_FIELD:
-            const value = action.payload.value;
-            const index = action.payload.index;
+            const name = action.payload.name;
+
             return {
                 ...state,
-                data: state.data.map(filter => {
-                    if(filter[0].value.slice("=")[0] === value.slice("=")[0]){
-                        filter[index].checked = !filter[index].checked
+                data: {
+                    ...state.data,
+                    [name]: state.data[name].map((item, index) => {
+                    if (action.payload.index === index) {
+                        return {
+                            ...item,
+                            checked: !item.checked
+                        }
                     }
 
-                    return filter;
+                    return item;
                 })
+            }
             };
 
         case REMOVE_ALL_CHECKS:
-            return{
-                ...state,
-                data: state.data.map(filter => filter.map(item => {
-                    item.checked = false;
-                    return item;
-                }))
-            };
+            for (const [key, value] of Object.entries(state.data)) {
+                state.data[key] = value.map(item => {
+                    return {
+                        ...item,
+                        checked: false
+                    }
+                });
+            }
+
+            return {...state};
 
         default: return state;
     }

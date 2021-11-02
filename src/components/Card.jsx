@@ -4,7 +4,7 @@ const Card = (props) => {
     const {id = '', images = [], title = '', rating = 0, price = 0,  brand = ''} = props.data;
 
     const bgImage = {
-        backgroundImage: `url(${images[0] || images[1]})`
+        backgroundImage: `url(${images[0]})`
     };
 
     return(

@@ -11,7 +11,7 @@ const FiltersListItem = (props) => {
                        value={value.split("=")[1]}
                        name={value.split("=")[0]}
                        id={value.split("=")[1]}
-                       onChange={event => onCheck(event)}>
+                       onChange={onCheck}>
                 </input>
                     <label htmlFor={value.split("=")[1]}>
                         <span className={`filters__checkbox${checked?" filters__checkbox_checked":""}`}>

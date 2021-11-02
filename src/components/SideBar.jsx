@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchFilters, removeAllChecks, resetSlider} from '../redux';
+import {fetchFilters, removeAllChecks, resetSlider, setSliders} from '../redux';
 import FiltersList from './FiltersList';
 import DoubleSlider from './DoubleSlider';
+import {prepareSlider} from "../functions/prepareSlider";
 
 const SideBar = () => {
     const url = process.env.REACT_APP_BACKEND_URL;
+    const products = useSelector(state => state.products);
     const filters = useSelector(state => state.filters);
     const sliders = useSelector(state => Object.values(state.sliders));
     const dispatch = useDispatch();
@@ -13,6 +15,14 @@ const SideBar = () => {
     useEffect(() => {
         dispatch(fetchFilters(url));
     }, []);
+
+    useEffect(() => {
+        if(!products.loading){
+            const sliders = {};
+            sliders.price = prepareSlider(products.data,'price', value => value + '₴');
+            dispatch(setSliders(sliders));
+        }
+    }, [products]);
 
     const reset = () => {
         const thumbLeft = document.querySelectorAll('.range-slider__thumb-left');
@@ -39,13 +49,14 @@ const SideBar = () => {
                 </button>
             </div>
             <div className="filters__content">
-                {sliders.map((slider, index) => {
+                {products.loading? '' :
+                    sliders.map((slider, index) => {
                     return <DoubleSlider
                         slider = {slider}
                         key = {index}
                     />
                 })}
-                {filters.data.map((list, index) => {
+                {Object.values(filters.data).map((list, index) => {
                     const title = list[0].value.split("=")[0].slice(0,1).toUpperCase() + list[0].value.split("=")[0].slice(1);
                     return <FiltersList title = {title} list = {list} key = {index}/>
                 })}
