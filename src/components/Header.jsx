@@ -12,10 +12,10 @@ const Header = (props) => {
             </div>
             <ul className="breadcrumb">
 
-                    <li className="breadcrumb__item"><Link to='/'><a href="#"><img src="img/home.svg" alt="home"/></a></Link></li>
+                    <li className="breadcrumb__item"><Link to='/'><img src="img/home.svg" alt="home"/></Link></li>
 
-                {linksHistory.splice(0, linksHistory.length - 1).map(name =>
-                    <li className="breadcrumb__item"><a href="#">{name}</a></li>
+                {linksHistory.splice(0, linksHistory.length - 1).map((name,i) =>
+                    <li className="breadcrumb__item" key={i}><a href="#">{name}</a></li>
                 )}
                 <li className="breadcrumb__item breadcrumb__item_cur-page">
                     <a href="#">

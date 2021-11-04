@@ -17,7 +17,7 @@ const SideBar = () => {
     }, []);
 
     useEffect(() => {
-        if(!products.loading){
+        if(products.data.length !== 0){
             const sliders = {};
             sliders.price = prepareSlider(products.data,'price', value => value + '₴');
             dispatch(setSliders(sliders));
