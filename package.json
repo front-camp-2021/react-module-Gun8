@@ -29,10 +29,12 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "latest",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
+    "bootstrap-icons": "^1.7.0",
     "json-server": "^0.16.3",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
@@ -44,7 +46,6 @@
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.0",
-    "web-vitals": "^1.1.2",
-    "@emotion/react": "latest"
+    "web-vitals": "^1.1.2"
   }
 }

@@ -1,0 +1,14 @@
+@use './colors' as *;
+@use './utils' as *;
+
+.wish-list{
+  &__btn{
+    @extend %btn-pre-setting;
+    @extend %shadowed-box;
+    width: 25rem;
+    height: 3.5rem;
+    background: $bg-primary;
+    font-size: 1.125rem;
+    color: #FFFFFF;
+  }
+}

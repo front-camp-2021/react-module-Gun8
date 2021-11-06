@@ -1,10 +1,42 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {addToWishList,removeFromWishList} from "../redux";
 
 const Card = (props) => {
     const {id = '', images = [], title = '', rating = 0, price = 0,  brand = ''} = props.data;
 
+    let wishListIdArray = [];
+    const redHeart = '<img src="img/red-heart.svg" alt="like">wishlist';
+    const blackHeart = '<img src="img/black-heart.svg" alt="like">wishlist';
+
+    const wishList = useSelector(state => state.wishList);
+    const dispatch = useDispatch();
+    const wishListButton = useRef(null);
+
+   useEffect(() => {
+       wishListIdArray = wishList.data.map(item => item.id);
+
+        if(wishListIdArray.includes(props.data.id)){
+            wishListButton.current.innerHTML = redHeart;
+        }
+        else {
+            wishListButton.current.innerHTML = blackHeart;
+        }
+    });
+
     const bgImage = {
         backgroundImage: `url(${images[0]})`
+    };
+
+    const toggleWishList = () => {
+        if(!wishListIdArray.includes(props.data.id)){
+            wishListButton.current.innerHTML = redHeart;
+            dispatch(addToWishList(props.data));
+        }
+        else {
+            wishListButton.current.innerHTML = blackHeart;
+            dispatch(removeFromWishList(props.data));
+        }
     };
 
     return(
@@ -22,7 +54,7 @@ const Card = (props) => {
               <p>{brand}</p>
           </div>
           <div className="item__buttons">
-              <button>
+              <button ref={wishListButton} onClick={toggleWishList}>
                   <img src="img/black-heart.svg" alt="like" />
                       wishlist
               </button>

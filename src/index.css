@@ -19,13 +19,13 @@ body {
   align-items: center;
 }
 
-.pagination button, .filters__hide-btn, .filters__reset-btn, .item-list-header__like-btn, .item-list-search input, .item__buttons button {
+.wish-list__btn, .pagination button, .filters__hide-btn, .filters__reset-btn, .item-list-header__like-btn, .item-list-search input, .item__buttons button {
   border: none;
   outline: none;
   cursor: pointer;
 }
 
-.filters__hide-btn, .filters__content, .filters__reset-btn, .item-list-header__like-btn, .item-list-search, .item {
+.wish-list__btn, .filters__hide-btn, .filters__content, .filters__reset-btn, .item-list-header__like-btn, .item-list-search, .item {
   background: #FFFFFF;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.135216);
   border-radius: 8px;
@@ -139,6 +139,12 @@ body {
 }
 .item__buttons button:nth-child(1) img {
   margin-right: 0.563rem;
+}
+.item__buttons button:nth-child(1):hover {
+  background: #d4d4d4;
+}
+.item__buttons button:nth-child(1):active {
+  background: #c2c2c2;
 }
 .item__buttons button:nth-child(2) {
   border-radius: 0 0 8px 0;
@@ -329,6 +335,14 @@ body {
 }
 .breadcrumb__item_cur-page a {
   color: #2C2C2C;
+}
+
+.wish-list__btn {
+  width: 25rem;
+  height: 3.5rem;
+  background: #6F64F8;
+  font-size: 1.125rem;
+  color: #FFFFFF;
 }
 
 /*# sourceMappingURL=index.css.map */

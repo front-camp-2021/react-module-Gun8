@@ -136,6 +136,14 @@
         img{
           margin-right: 0.563rem;
         }
+
+        &:hover{
+          background: #d4d4d4;
+        }
+
+        &:active{
+          background: #c2c2c2;
+        }
       }
 
       &:nth-child(2){

@@ -1,11 +1,12 @@
 import React from "react";
-import { Provider } from 'react-redux'
+import { Provider} from 'react-redux'
 import store from './redux/store'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Electronics from './components/Electronics';
 import WishList from './components/WishList';
 import "./index.css";
 import "./media.css";
+
 
 
 function App() {

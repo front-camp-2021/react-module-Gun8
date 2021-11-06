@@ -1,16 +1,19 @@
 import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import Header from './Header';
 import CardList from './CardList';
 import Pagination from './Pagination';
-import { products } from '../fixtures/products.js'
+import {clearWishList} from "../redux";
 
 const WishList = () => {
-    const data = [...products].splice(1,2);
+    const wishList = useSelector(state => state.wishList.data);
+    const dispatch = useDispatch();
 
     return(
-        <div style={{height: '100vh'}}>
+        <div className="wish-list">
             <Header linksHistory = {['Wish list']}/>
-            <CardList data = {data}/>
+            <button onClick={() => dispatch(clearWishList())} className="wish-list__btn">CLEAR ALL ITEMS</button>
+            <CardList products = {wishList}/>
             <Pagination />
         </div>
     )

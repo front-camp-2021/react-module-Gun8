@@ -1,17 +1,11 @@
-import React, {useEffect}  from 'react';
+import React  from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {changePage, changeNumOfPages} from '../redux';
+import {changePage} from '../redux';
 
 const Pagination = () => {
-    const filteredProducts = useSelector(state => state.filteredProducts.data);
     const pagination = useSelector(state => state.pagination);
     const dispatch = useDispatch();
     const pageIndex = pagination.currentPage - 1;
-
-    useEffect(() => {
-        dispatch(changeNumOfPages(Math.ceil(filteredProducts.length/pagination.pageLimit)));
-        dispatch(changePage(1));
-    }, [filteredProducts]);
 
     const toPrevPage = () => {
         if(pagination.currentPage > 1){
@@ -50,13 +44,17 @@ const Pagination = () => {
     };
 
   return(
-      <footer className="pagination">
-          <button onClick={toPrevPage} className="pagination__prev" data-element="prev" />
-          <ul className="pagination__list" data-element="list">
-              {getPagesList()}
-          </ul>
-          <button onClick={toNextPage} className="pagination__next" data-element="next" />
-      </footer>
+      <>
+      {pagination.totalPages === 0? '' :
+        <footer className="pagination">
+            <button onClick={toPrevPage} className="pagination__prev" data-element="prev" />
+            <ul className="pagination__list" data-element="list">
+                {getPagesList()}
+            </ul>
+            <button onClick={toNextPage} className="pagination__next" data-element="next" />
+        </footer>
+    }
+    </>
   )
 };
 
