@@ -21,8 +21,6 @@ const Electronics = () => {
             <Pagination />
         </>
     );
-
-
 };
 
 export default Electronics;

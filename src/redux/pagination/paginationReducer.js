@@ -2,7 +2,7 @@ import {CHANGE_PAGE, CHANGE_NUMBER_OF_PAGES} from "./paginationTypes";
 
 const initialState = {
     currentPage: 1,
-    totalPages: 0,
+    totalPages: 10,
     pageLimit: 12
 };
 

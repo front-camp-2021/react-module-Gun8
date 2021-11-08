@@ -33,11 +33,14 @@ const Pagination = () => {
 
         for(let i = 0; i < pagination.totalPages; i++){
             if(i === pageIndex){
-                pages.push(<li onClick={() => toPage(i+1)} className="pagination__page-item pagination__page-item_active">{i+1}</li>);
+                pages.push(<li onClick={() => toPage(i+1)}
+                               className="pagination__page-item pagination__page-item_active"
+                               key={i}
+                >{i+1}</li>);
                 continue;
             }
 
-            pages.push(<li onClick={() => toPage(i+1)} className="pagination__page-item">{i+1}</li>);
+            pages.push(<li onClick={() => toPage(i+1)} className="pagination__page-item" key={i}>{i+1}</li>);
         }
 
         return pages;
@@ -47,11 +50,11 @@ const Pagination = () => {
       <>
       {pagination.totalPages === 0? '' :
         <footer className="pagination">
-            <button onClick={toPrevPage} className="pagination__prev" data-element="prev" />
+            <button onClick={toPrevPage} className="pagination__prev" data-testid = "prev" data-element="prev" />
             <ul className="pagination__list" data-element="list">
                 {getPagesList()}
             </ul>
-            <button onClick={toNextPage} className="pagination__next" data-element="next" />
+            <button onClick={toNextPage} className="pagination__next" data-testid = "next" data-element="next" />
         </footer>
     }
     </>
